@@ -1,0 +1,12 @@
+.modalHeader {
+    align-items: center !important;
+    flex-direction: column;
+}
+.modal-body{
+    font-family: cursive;
+    font-weight: bold;
+}
+.modal-body input{
+    float: right;
+    background-color: beige
+}

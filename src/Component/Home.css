@@ -1,0 +1,91 @@
+.main-box{
+    background-color: khaki;
+    padding: 10px;
+    width: 40%;
+    min-height: 200px;
+    margin-top: 20px;
+    margin-left: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+.box{
+    width:50% auto;
+    height: 100px;
+    border-radius:10px;
+    background-color: khaki;
+}
+.button{
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    display: flex;
+}
+.header-text{
+    display: flex;
+    justify-content: center;
+}
+.list-group-item {
+    user-select: none;
+  }
+  
+  .list-group input[type="checkbox"] {
+    display: none;
+  }
+  
+  .list-group input[type="checkbox"] + .list-group-item {
+    cursor: pointer;
+  }
+  
+  .list-group input[type="checkbox"] + .list-group-item:before {
+    content: "\2713";
+    color: transparent;
+    font-weight: bold;
+    margin-right: 1em;
+  }
+  
+  .list-group input[type="checkbox"]:checked + .list-group-item {
+    background-color: #0275D8;
+    color: #FFF;
+  }
+  
+  .list-group input[type="checkbox"]:checked + .list-group-item:before {
+    color: inherit;
+  }
+  
+  .list-group input[type="radio"] {
+    display: none;
+  }
+  
+  .list-group input[type="radio"] + .list-group-item {
+    cursor: pointer;
+  }
+  
+  .list-group input[type="radio"] + .list-group-item:before {
+    content: "\2022";
+    color: transparent;
+    font-weight: bold;
+    margin-right: 1em;
+  }
+  
+  .list-group input[type="radio"]:checked + .list-group-item {
+    background-color: #0275D8;
+    color: #FFF;
+  }
+  
+  .list-group input[type="radio"]:checked + .list-group-item:before {
+    color: inherit;
+  }
+
+  .my-flex-auto{
+    flex: auto
+  }
+
+  .list-group-item{
+    text-align: left !important;
+  }
+
+  .handle button{
+    padding: 0px !important;
+  }
