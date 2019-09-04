@@ -4,13 +4,47 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import './Home.css'
 import './User.css'
+import { resolve } from 'q';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: []
+      users: [],
+      selectedUser: []
     };
+    this.selectionChanged = this.selectionChanged.bind(this);
+    this.addToGroup = this.addToGroup.bind(this)
+  }
+  addToGroup(docId){
+    return new Promise((resolve, reject) => {
+      let users = this.state.users
+      let selectedMembers = this.state.selectedUser.map(member => {return users[member]})
+      let fs = window.firebase.firestore();
+      fs.collection("groups").doc(docId).update({
+        members: selectedMembers 
+      })
+      .then(()=> {
+        console.log("members added")
+        resolve()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    })
+  }
+  selectionChanged(ev, index){
+    console.log(ev)
+    console.log(index)
+    if(ev.target.checked){
+      this.state.selectedUser.push(index)
+    }
+    else{
+      let mIndex = this.state.selectedUser.find(member=>{
+        return (member === index)
+      })
+      this.state.selectedUser.pop(mIndex)
+    }
   }
   render () {
     return (
@@ -24,15 +58,15 @@ class Home extends Component {
           <div className="container">
 
           <div className="list-group">
-            {this.state.users.map((user) =>
+            {this.state.users.map((user, index) =>
               <div key={user}>
-                <input type="checkbox" name="CheckBoxInputName" value={user} id={user} />
+            <input type="checkbox" name="CheckBoxInputName" value={user} id={user} onChange={(ev) => this.selectionChanged(ev, index)}/>
                 <label className="list-group-item" htmlFor={user}>{user}</label>
               </div>
             )}
           </div>
           <div className='button'>
-          <HandleModal />
+          <HandleModal addToGroup={this.addToGroup}/>
           </div>
           
           </div>
