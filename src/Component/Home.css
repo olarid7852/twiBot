@@ -9,11 +9,12 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    border-radius: 20px;
 }
 .box{
     width:50% auto;
     height: 100px;
-    border-radius:10px;
+    border-radius:20px;
     background-color: khaki;
 }
 .button{
@@ -25,7 +26,14 @@
 .header-text{
     display: flex;
     justify-content: center;
+    font-family: cursive;
+    font-style: oblique;
 }
+.list-group{
+  font-family: cursive;
+  font-weight: bold; 
+}
+
 .list-group-item {
     user-select: none;
   }
