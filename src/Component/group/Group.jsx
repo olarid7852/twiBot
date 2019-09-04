@@ -33,9 +33,10 @@ class Home extends Component {
                 <MyListItem document={document} mainFieldName={mainFieldName} scheduledFieldName={scheduledFieldName} collectionName={collectionName} updateHandles={this.updateHandles}/>
             )}
           </div>
-          <div className='button'>
+          {/* <div className='button'>
           <Modal onComplete={this.updateHandles}/>
-          </div>
+          </div> */}
+          <div>{this.props.children}</div>
           
           </div>
         </div>

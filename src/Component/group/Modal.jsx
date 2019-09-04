@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 // import './User.css'
+import {addDocument} from '../utils/firestore'
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -13,12 +14,10 @@ class Modal extends Component {
   }
 
   handleSubmit(event) {
-    console.log(this.state.value);
-    let fs = window.firebase.firestore();
     let $this = this
-    fs.collection("handles").add({
+    addDocument("groups", {
       handle: this.state.value,
-      scraped: false
+      scheduled: false
     })
     .then(function(docRef) {
       console.log("Document written with ID: ", docRef.id);

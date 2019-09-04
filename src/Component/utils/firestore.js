@@ -21,7 +21,9 @@ async function deleteDocument(collectionName, docId){
     console.log('deleted')
     return await fs.collection(collectionName).doc(docId).delete()
 }
-async function addDocument(collection, newDoc){}
+async function addDocument(collection, newDoc){
+    return await fs.collection(collection).add(newDoc)    
+}
 
 export {
     getDocumentList,
