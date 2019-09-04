@@ -2,10 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./Component/Home"
 import Handle from "./Component/Handle"
-import Group from "./Component/Group"
+import Group from "./Component/group/Group"
 import logo from './logo.svg';
 import './App.css';
-
+import './Component/Home.css'
+import './Component/User.css'
 function App() {
   return (
     <div className="App">
@@ -26,7 +27,18 @@ function App() {
       </header>
       <Router>
         <Route exact path="/" component={Home} />
-        <Route exact path="/group" component={Group} />
+        <Route exact path="/group" render={(props) => <Group {...props} 
+              collectionName="groups"
+              mainFieldName="name"
+              scheduledFieldName="scheduled"
+              title="Groups" />}
+              />
+        <Route exact path="/accounts" render={(props) => <Group {...props} 
+              collectionName="accounts"
+              mainFieldName="name"
+              scheduledFieldName="scheduled"
+              title="Accounts" />}
+              />
         <Route exact path="/handle/:handle" component={Handle} />
       </Router>
     </div>

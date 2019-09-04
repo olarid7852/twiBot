@@ -1,20 +1,24 @@
 import React, { Component, useEffect } from 'react'
 import Modal from './Modal'
+import MyListItem from './MyListItem'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {deleteDocument, updateDocument, getDocumentList} from './utils/firestore'
 import './Home.css'
 import './User.css'
+import myListItem from './MyListItem';
 
+let collectionName = "handles"
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       handles: []
     }
-    this.updateHandles = this.updateHandles.bind(this);
-    this.handleDelete = this.handleDelete.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
+    // this.updateHandles = this.updateHandles.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this)
+    // this.handleUpdate = this.handleUpdate.bind(this)
   }
   render () {
     return (
@@ -28,22 +32,7 @@ class Home extends Component {
 
           <div className={"list-group"}>
             {this.state.handles.map((handle, index) =>
-                  <li key={index} className={"list-group-item  list-group-item-action  d-flex handle"}>
-                    <Link to={"/handle/" + handle.handle} class="my-flex-auto d-flex flex-row">
-                      <span className="my-flex-auto"> {handle.handle} </span>
-                      <span className="badge">
-                        <i className={`material-icons ${handle.scraped ? "text-success": "text-warning"}`}>
-                        {handle.scraped ? "check_circle" : "schedule"}
-                      </i>
-                      </span>
-                     </Link>
-                      <button className="btn">
-                        <i className="material-icons" onClick={this.handleDelete}> delete </i>
-                      </button>
-                      <button className="btn">
-                        <i className="material-icons" onClick={this.handleUpdate}> edit </i>
-                       </button>
-                  </li>
+                <MyListItem document={handle} collectionName={collectionName} key={handle.id} updateHandles={this.updateHandles}/>
             )}
           </div>
           <div className='button'>
@@ -55,21 +44,10 @@ class Home extends Component {
       </React.Fragment>
     )
   }
-  updateHandles(){
-    let fs = window.firebase.firestore();
-    let handles = []
-    let $this = this
-    fs.collection("handles").get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-          handles.push(doc.data())
-          console.log(doc.data())
-          $this.setState({handles: handles})
-      });
-    });
+  updateHandles = async () => {
+    this.setState({handles: await getDocumentList(collectionName)})
   }
 
-  handleDelete () {}
-  handleUpdate () {}
   componentWillMount(){
     this.updateHandles()
   }
