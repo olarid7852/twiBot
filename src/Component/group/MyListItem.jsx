@@ -18,9 +18,10 @@ class MyListItem extends Component {
         let handle = this.props.document
         let mainFieldName = this.props.mainFieldName
         let scheduledFieldName = this.props.scheduledFieldName
+        let linkName = this.props.linkName
         return (
                 <li className={"list-group-item  list-group-item-action  d-flex handle"} key={handle.id}>
-                    <Link to={"/handle/" + handle[mainFieldName]} className="my-flex-auto d-flex flex-row">
+                    <Link to={linkName + handle[mainFieldName]} className="my-flex-auto d-flex flex-row">
                       <span className="my-flex-auto"> {handle[mainFieldName]} </span>
                       <span className="badge">
                         <i className={`material-icons ${handle[scheduledFieldName] ? "text-success": "text-warning"}`}>

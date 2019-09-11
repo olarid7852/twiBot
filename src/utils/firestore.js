@@ -11,16 +11,28 @@ async function getDocumentList(collectionName){
     });
     return documents
 }
-async function getDocumentListWithQuery(collectionName, query){
-    let documents = []
-    console.log("start")
-    let querySnapshot = await fs.collection(collectionName).get(query)
-    querySnapshot.forEach((doc) => {
-        documents.push({...doc.data(), id: doc.id})
-        console.log(documents)
-    });
-    console.log("end")
-    return documents
+async function getDocumentListWithQuery(collectionName, queryFunction){
+    try{
+        let documents = []
+        console.log("start")
+        let docRef = fs.collection(collectionName)
+        console.log({docRef})
+        console.log({queryFunction})
+        let temp = queryFunction(docRef)
+        console.log({temp})
+        let querySnapshot = await temp.get()
+        console.log({querySnapshot})
+        querySnapshot.forEach((doc) => {
+            documents.push({...doc.data(), id: doc.id})
+            console.log(documents)
+        });
+        console.log({a:"end", documents})
+        return documents
+    }
+    catch(err){
+        console.error(err)
+        return []
+    }
 }
 async function updateDocument(collectionName, docId, update){}
 async function appendDocumentListField(collectionName, docId, fieldName, values){}

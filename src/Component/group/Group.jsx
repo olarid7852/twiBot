@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Modal from './Modal'
 import MyListItem from './MyListItem'
 import {getDocumentList} from '../utils/firestore'
 
@@ -20,31 +19,23 @@ class Home extends Component {
     let scheduledFieldName = this.props.scheduledFieldName
     let title = this.props.title
     return (
-      <React.Fragment>
-        <div className='main-box'>
-          <div className='header-text'>
-            <h3>{title}</h3>
-          </div>
-        
-          <div className="container">
-
-          <div className={"list-group"}>
-            {this.state.documents.map((document, index) =>
-                <MyListItem document={document} mainFieldName={mainFieldName} scheduledFieldName={scheduledFieldName} collectionName={collectionName} updateHandles={this.updateHandles}/>
-            )}
-          </div>
-          {/* <div className='button'>
-          <Modal onComplete={this.updateHandles}/>
-          </div> */}
-          <div>{this.props.children}</div>
-          
-          </div>
-        </div>
-      </React.Fragment>
+      <div className={"list-group"}>
+        {this.state.documents.map((document, index) =>
+          <MyListItem linkName={this.props.linkName} document={document} mainFieldName={mainFieldName} scheduledFieldName={scheduledFieldName} collectionName={collectionName} updateHandles={this.updateHandles}/>
+        )}
+      </div>
     )
   }
+
+  onComplete = () =>{
+    this.updateHandles()
+  }
   updateHandles = async () => {
-    this.setState({documents: await getDocumentList(this.props.collectionName)})
+    let documents = await getDocumentList(this.props.collectionName)
+    this.setState({documents: documents})
+    if(documents.length > 0){
+      this.setState({group: documents[0]})
+    }
   }
 
   componentWillMount(){

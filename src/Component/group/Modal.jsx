@@ -13,20 +13,16 @@ class Modal extends Component {
     this.setState({value: event.target.value});
   }
 
-  handleSubmit(event) {
+  handleSubmit = async (event) => {
     let $this = this
-    addDocument("groups", {
-      handle: this.state.value,
-      scheduled: false
+    let docRef = await addDocument("groups", {
+      name: this.state.value,
+      scheduled: false,
+      members: []
     })
-    .then(function(docRef) {
-      console.log("Document written with ID: ", docRef.id);
-      window.$('#exampleModal').modal('hide')
-      $this.props.onComplete()
-    })
-    .catch(function(error) {
-      console.error("Error adding document: ", error);
-    });
+    console.log("Document written with ID: ", docRef.id);
+    window.$('#exampleModal').modal('hide')
+    $this.props.onComplete()
   }
   render () {
     return (
