@@ -20,11 +20,9 @@
 .header-text{
     display: flex;
     justify-content: center;
-    font-family: cursive;
     font-style: oblique;
 }
 .list-group{
-  font-family: cursive;
   font-weight: bold; 
 }
 
