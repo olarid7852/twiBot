@@ -11,10 +11,10 @@ class MenuTab extends Component {
     render() {
         return (
             <div>
-                <nav className="nav nav-pills nav-justified nav-fill">            
-                    <button className={`nav-item nav-link ${this.props.location.pathname === '/' ? 'active' : 'inactive'}`}><Link className="d-flex" to="/">Handle</Link></button>
-                    <button className={`nav-item nav-link ${this.props.location.pathname === '/groups/' ? 'active' : 'inactive'}`}><Link className="d-flex" to="/groups/">Group</Link></button>
-                    <button className={`nav-item nav-link ${this.props.location.pathname === '/accounts/' ? 'active' : 'inactive'}`}><Link className="d-flex" to="/accounts/">Accounts</Link></button>
+                <nav className="nav nav-pills nav-justified nav-fill bg-secondary">            
+                    <Link className={`nav-item nav-link ${this.props.location.pathname === '/' ? 'active' : 'inactive'}`} to="/">Handle</Link>
+                    <Link className={`nav-item nav-link ${this.props.location.pathname === '/groups/' ? 'active' : 'inactive'}`} to="/groups/">Group</Link>
+                    <Link className={`nav-item nav-link ${this.props.location.pathname === '/accounts/' ? 'active' : 'inactive'}`} to="/accounts/">Accounts</Link>
                 </nav>
             </div>
         )
