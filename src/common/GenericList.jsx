@@ -11,7 +11,8 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
         constructor(props) {
             super(props);
             this.state = {
-                documents: []
+                documents: [],
+                newDataSubmitStatus: 1
             }
         }
         render () {
@@ -42,7 +43,7 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
                 </button>
               </div>
               <div className="modal-body">
-                <AddComponent onComplete={this.onComplete} additionalProps={this.props.dialogData}/>
+                <AddComponent onComplete={this.onComplete} additionalProps={this.props.dialogData} submitted={this.state.newDataSubmitStatus}/>
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Save</button>
@@ -62,6 +63,12 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
         closeModal = () => {
             console.log("closed")
         }
+
+        handleSubmit = () => {
+          console.log(100)
+          this.setState({newDataSubmitStatus: this.state.newDataSubmitStatus + 1})
+        }
+
         onComplete = async () =>{
             await this.updateHandles()
             this.closeModal()
