@@ -5,7 +5,7 @@ import React from 'react';
 // import MyListItem from "../Component/group/MyListItem";
 
 
-let MyListItem = genericListItem({collectionName: "accounts", mainFieldName: "username", linkName: "/account/"})
+let MyListItem = genericListItem({collectionName: "accounts", mainFieldName: "username", linkName: "/account/",  scheduledFieldName: "scraped"})
 let HomePageList = genericList(MyListItem, AddAccountModal, {collectionName: "accounts"})
 function HomePage() {
     return (

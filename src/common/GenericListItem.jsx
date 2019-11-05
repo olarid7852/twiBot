@@ -20,13 +20,25 @@ function genericListItem(pageData){
             let mainFieldName = pageData.mainFieldName
             let scheduledFieldName = pageData.scheduledFieldName
             let linkName = pageData.linkName
+            let progressClass = [
+              'warning',
+              'success',
+              'success',
+              'danger'
+            ]
+            let progressIcons = [
+              'stopwatch_off',
+              'clock_outline',
+              'checkbox-marked-circle-outline',
+              'close-circle'
+            ]
             return (
                     <li className={"list-group-item  list-group-item-action  d-flex handle"} key={handle.id}>
                         <Link to={linkName + handle[mainFieldName]} className="my-flex-auto d-flex flex-row">
                           <span className="my-flex-auto"> {handle[mainFieldName]} </span>
                           <span className="badge">
-                            <i className={`material-icons ${handle[scheduledFieldName] ? "text-success": "text-warning"}`}>
-                            {handle[scheduledFieldName] ? "check_circle" : "schedule"}
+                            <i className={`material-icons ${progressClass[handle[scheduledFieldName]] ? "text-success": "text-warning"}`}>
+                            {progressIcons[handle[scheduledFieldName]]}
                           </i>
                           </span>
                          </Link>

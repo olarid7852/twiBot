@@ -3,7 +3,7 @@ import { withRouter } from "react-router"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 // import GroupPage from "./pages/GroupPage"
 import HomePage from "./home/HomePage"
-import GroupPage from "./group/MainPage"
+import Messages from "./messages/MainPage"
 import GroupDetail from "./group/groutItem/MainPage"
 import AccountPage from "./account/MainPage"
 import MainLayout from "./Component/MainLayout"
@@ -64,9 +64,9 @@ class App extends Component {
                   title="Accounts" ><AddAccountModal/></Group>}
                   /> */}
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/groups/" component={GroupPage} />
+            <Route exact path="/groups/" component={GroupDetail} />
             <Route exact path="/accounts/" component={AccountPage} />
-            <Route exact path="/group/:groupName" component={GroupDetail} />
+            <Route exact path="/messages/:tagName" component={Messages} />
             <Route exact path="/handle/:handle" component={HandlePage} />
           </MainLayout>
           </Router>

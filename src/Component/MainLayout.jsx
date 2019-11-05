@@ -13,9 +13,8 @@ class MainLayout extends Component {
         return (
             <div className='main-box'>
                 <div className='header-text'>
-                    <h3>Title</h3>
                 </div>
-                <div className="container">
+                <div className="container mt-2">
                     {this.props.children}
                 </div>
             </div>

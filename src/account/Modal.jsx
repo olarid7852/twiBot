@@ -10,6 +10,13 @@ class Modal extends Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    console.log(prevProps)
+    if (prevProps.submitted !== this.props.submitted) {
+      this.handleSubmit()
+    }
+  }
+
   handleChangeUsername = (event) => {
     this.setState({username: event.target.value});
   }
@@ -19,10 +26,10 @@ class Modal extends Component {
   }
 
   handleSubmit = async (event) => {
-    console.log('i')
     let docRef = await addDocument("accounts", {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      inuse: false
     })
     console.log("Document written with ID: ", docRef.id);
     window.$('#exampleModal').modal('hide')
@@ -31,9 +38,9 @@ class Modal extends Component {
   render () {
     return (
       <React.Fragment>
-        <div className="alert alert-danger" role="alert">
+        {/* <div className="alert alert-danger" role="alert">
                 Username or Password is incorrect
-        </div>
+        </div> */}
         <div className="form-group">
           <label htmlFor="Username">Username</label>
           <input type="email" className="form-control" placeholder="Enter Username" 
@@ -44,7 +51,7 @@ class Modal extends Component {
           <label htmlFor="exampleInputPassword1">Password</label>
           <input type="password" className="form-control" onChange={this.handleChangePassword} placeholder="Password"/>
         </div>
-        <button type="submit" className="btn btn-primary text-right" onClick={this.handleSubmit}>Add</button>
+        {/* <button type="submit" className="btn btn-primary text-right" onClick={this.handleSubmit}>Add</button> */}
       </React.Fragment>
     )
   }

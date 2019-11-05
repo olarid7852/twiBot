@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import './User.css'
-import {addDocument} from '../../utils/firestore'
+import {addDocument} from '../utils/firestore'
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,6 @@ class Modal extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps)
     if (prevProps.submitted !== this.props.submitted) {
       this.handleSubmit()
     }
@@ -37,6 +36,7 @@ class Modal extends Component {
 
   handleSubmit = async () => {
       let data = {
+          tag: this.props.additionalProps.tagName,
           link: this.state.link,
           message: this.state.message,
           datetime: new Date(this.state.date + "T" + this.state.time),

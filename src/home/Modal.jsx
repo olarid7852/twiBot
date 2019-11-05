@@ -33,7 +33,7 @@ class Modal extends Component {
     await addDocument("handles", {
       handle: this.state.handle,
       tag: this.state.tag,
-      scraped: false
+      scraped: 0
     })
     window.$('#exampleModal').modal('hide')
     this.props.onComplete()

@@ -1,13 +1,13 @@
-import genericList from "../../common/GenericList"
-import genericListItem from "../../common/GenericListItem"
+import genericList from "../common/GenericList"
+import genericListItem from "../common/GenericListItem"
 import AddNewScheduleModal from "./AddNewScheduleModal"
 import React, {Component} from 'react';
-import {getDocumentListWithQuery} from '../../utils/firestore'
+import {getDocumentListWithQuery} from '../utils/firestore'
 // import MyListItem from "../Component/group/MyListItem";
 
 const filterFunction = (props) => {
     return function(docRef){
-        return docRef
+        return docRef.where("tag", "==", props.tagName)
     }
 }
 
@@ -33,7 +33,8 @@ class MainPage extends Component {
                 {a: 1})
     }
     groupFilter = (docRef) => {
-        return docRef.where("name", "!=", "")
+        console.log(9)
+        return docRef.where("name", "==", this.props.match.params.tagName)
     }
     getGroupDetail = async () => {
         let documents = await getDocumentListWithQuery("groups", this.groupFilter)
@@ -49,7 +50,9 @@ class MainPage extends Component {
             <div>
                 <this.HomePageList group={this.state.group} 
                         shouldUpdate={this.state.shouldUpdate}
-                        dialogData={{group: this.state.group}}/>
+                        dialogData={{tagName: this.props.match.params.tagName}}
+                        tagName={this.props.match.params.tagName}
+                        />
             </div>
         )
     }
