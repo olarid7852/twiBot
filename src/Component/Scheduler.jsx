@@ -6,19 +6,28 @@ import './User.css'
 class Scheduler extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+        this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value
+        });
     }
 
     handleSubmit(event) {
-        console.log(this.state.value);
+        let data = this.state
+        event.preventDefault()
+        console.log('data')
+        console.log(data)
         let $this = this
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
+        axios.post(`http://127.0.0.1:5000/run-tasks`,
+            {data}  )
             .then(res => {
                  console.log(res.data)
             })
