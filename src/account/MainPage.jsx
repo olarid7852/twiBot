@@ -1,6 +1,7 @@
 import genericList from "../common/GenericList"
 import genericListItem from "../common/GenericListItem"
 import AddAccountModal from "./Modal"
+import Scheduler from "../Component/Scheduler";
 import React from 'react';
 // import MyListItem from "../Component/group/MyListItem";
 
@@ -11,6 +12,7 @@ function HomePage() {
     return (
         <div>
             <HomePageList/>
+            <Scheduler/>
         </div>
     )
 }
