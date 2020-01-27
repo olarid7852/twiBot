@@ -3,6 +3,7 @@ import axios from 'axios';
 import './User.css'
 import {getDocumentList} from './utils/firestore'
 import MyListItem from "./MyListItem";
+import DynamicSelect from "./DynamicSelect";
 
 
 class Scheduler extends Component {
@@ -12,21 +13,23 @@ class Scheduler extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             tags: [],
-            tag : ''
+            tag: ''
         }
     }
 
     updateTags = async () => {
 
         this.setState({tags: await getDocumentList('tags')})
-console.log('status')
-console.log(this.state)
     }
 
-   async componentDidMount() {
-       await this.updateTags()
+    async componentDidMount() {
+        await this.updateTags()
     }
-
+  handleSelectChange = (selectedValue) =>{
+    this.setState({
+      tag: selectedValue
+    });
+  }
     handleChange(event) {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -40,8 +43,9 @@ console.log(this.state)
         let {tags, ...data} = this.state
         event.preventDefault()
         console.log(data)
+        console.log(event)
         let $this = this
-        axios.post(`http://127.0.0.1:5000/run-tasks`,
+        axios.post(`http://127.0.0.1:3001/run-tasks`,
             {data})
             .then(res => {
                 console.log(res.data)
@@ -56,40 +60,50 @@ console.log(this.state)
 
 
                     <form action="">
-                        <div className="form-group">
-                            <label htmlFor='modal-select'>Enter Year</label>
-                            <input type='text' name="year" class="form-control" onChange={this.handleChange}></input>
+                        <div className="form-row align-items-center">
+                            <div className="col-auto">
+                                <label htmlFor='modal-select'>Enter Year</label>
+                                <input type='text' name="year" className="form-control "
+                                       onChange={this.handleChange}></input>
+                            </div>
+                            <div className="col-auto">
+                                <label htmlFor='modal-select'>Enter Month</label>
+                                <input type='text' name="month" className="form-control"
+                                       onChange={this.handleChange}></input>
+                            </div>
+
+                            <div className="col-auto">
+                                <label htmlFor='modal-select'>Enter Day</label>
+                                <input type='text' name="day" className="form-control"
+                                       onChange={this.handleChange}></input>
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <label htmlFor='modal-select'>Enter Month</label>
-                            <input type='text' name="month" class="form-control" onChange={this.handleChange}></input>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor='modal-select'>Enter Day</label>
-                            <input type='text' name="day" class="form-control" onChange={this.handleChange}></input>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor='modal-select'>Enter Hour</label>
-                            <input type='text' name="hour" class="form-control" onChange={this.handleChange}></input>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor='modal-select'>Enter Minute</label>
-                            <input type='text' name="minute" class="form-control" onChange={this.handleChange}></input>
+
+                        <div className="form-row align-items-center">
+                            <div className="col-auto">
+                                <label htmlFor='modal-select'>Enter Hour</label>
+                                <input type='text' name="hour" className="form-control"
+                                       onChange={this.handleChange}></input>
+                            </div>
+                            <div className="col-auto">
+                                <label htmlFor='modal-select'>Enter Minute</label>
+                                <input type='text' name="minute" className="form-control"
+                                       onChange={this.handleChange}></input>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label htmlFor='modal-select'>Enter URL</label>
-                            <input type='text' name="url" class="form-control" onChange={this.handleChange}></input>
+                            <input type='text' name="url" className="form-control" onChange={this.handleChange}></input>
                         </div>
-                        <div className="form-group">
 
-                            <select value={this.state.tag} name='tag' onChange={this.handleChange}>
-                                            {this.state.tags.map((tag, index) =>
-                              <option key={index} value={tag.name}>{tag.name}</option>
-                                                    )}
-                            </select></div>
+                        <div className="form-group">
+                            <label htmlFor='modal-select'>Select Tag</label>
+             <DynamicSelect arrayOfData={this.state.tags} onSelectChange={this.handleSelectChange} />
+                        </div>
 
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Save</button>
+                            <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Schedule
+                            </button>
 
                         </div>
 

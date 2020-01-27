@@ -13,6 +13,7 @@ import './App.css';
 import './Component/Home.css'
 import './Component/User.css'
 import PropTypes from 'prop-types'
+import SchedulerPage from "./pages/SchedulerPage";
 
 const NavigationBar = withRouter(MenuTab);
 
@@ -66,6 +67,7 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/groups/" component={GroupDetail} />
             <Route exact path="/accounts/" component={AccountPage} />
+            <Route exact path="/scheduler/" component={SchedulerPage} />
             <Route exact path="/messages/:tagName" component={Messages} />
             <Route exact path="/handle/:handle" component={HandlePage} />
           </MainLayout>

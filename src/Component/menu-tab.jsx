@@ -16,6 +16,7 @@ class MenuTab extends Component {
                     <Link className={`nav-item nav-link text-white ${this.props.location.pathname === '/' ? 'active' : 'inactive'}`} to="/">Handle</Link>
                     <Link className={`nav-item nav-link text-white ${this.props.location.pathname === '/groups/' ? 'active' : 'inactive'}`} to="/groups/">Group</Link>
                     <Link className={`nav-item nav-link text-white ${this.props.location.pathname === '/accounts/' ? 'active' : 'inactive'}`} to="/accounts/">Accounts</Link>
+                    <Link className={`nav-item nav-link text-white ${this.props.location.pathname === '/scheduler/' ? 'active' : 'inactive'}`} to="/scheduler/">scheduler</Link>
                 </nav>
             </div>
         )

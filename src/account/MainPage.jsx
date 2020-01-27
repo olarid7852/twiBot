@@ -12,7 +12,6 @@ function HomePage() {
     return (
         <div>
             <HomePageList/>
-            <Scheduler/>
         </div>
     )
 }
