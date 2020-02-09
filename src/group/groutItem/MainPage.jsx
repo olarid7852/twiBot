@@ -1,6 +1,6 @@
 import genericList from "../../common/GenericList"
 import genericListItem from "../../common/GenericListItem"
-import AddNewScheduleModal from "./AddNewScheduleModal"
+import AddGroupModal from "./AddGroupModal"
 import React, {Component} from 'react';
 import {getDocumentListWithQuery} from '../../utils/firestore'
 // import MyListItem from "../Component/group/MyListItem";
@@ -28,15 +28,16 @@ class MainPage extends Component {
             group: {},
             shouldUpdate: false
         }
-        this.MyListItem = genericListItem({collectionName: "groupmessage", mainFieldName: "message", linkName: "/group/"})
-        this.HomePageList = genericList(this.MyListItem, AddNewScheduleModal, {collectionName: "groupmessage", filterFunction: filterFunction},
+        console.log('ahahhaha')
+        this.MyListItem = genericListItem({collectionName: "handles", mainFieldName: "tag", linkName: "/tag/"})
+        this.HomePageList = genericList(this.MyListItem, AddGroupModal, {collectionName: "handles", filterFunction: filterFunction},
                 {a: 1})
     }
     groupFilter = (docRef) => {
-        return docRef.where("name", "!=", "")
+        return docRef.where("handle", "!=", "")
     }
     getGroupDetail = async () => {
-        let documents = await getDocumentListWithQuery("groups", this.groupFilter)
+        let documents = await getDocumentListWithQuery("handles", this.groupFilter)
         this.setState({shouldUpdate: true})
         window.setTimeout(() => {this.setState({shouldUpdate: false})}, 1000)
         this.setState({group: documents[0]})
@@ -49,7 +50,8 @@ class MainPage extends Component {
             <div>
                 <this.HomePageList group={this.state.group} 
                         shouldUpdate={this.state.shouldUpdate}
-                        dialogData={{group: this.state.group}}/>
+                        dialogData={{group: this.state.group}}
+                />
             </div>
         )
     }

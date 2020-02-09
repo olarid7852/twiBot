@@ -1,6 +1,6 @@
 import React, { Component, Children } from 'react'
 import GroupList from '../Component/group/Group'
-import AddNewSchedule from '../Component/AddNewScheduleModal'
+import AddGroupModal from '../Component/AddGroupModal'
 import {fs} from '../Component/utils/firestore'
 
 class GroupPage extends Component {
@@ -10,10 +10,11 @@ class GroupPage extends Component {
         this.state = {
             group: {}
         }
+        console.log('grouppp')
+
     }
 
     updateMessages = async () => {
-        console.log(11)
         let document = {}
         let documents = await fs.collection("groups")
             .where("name", "==", this.props.match.params.groupName).get()
@@ -37,7 +38,7 @@ class GroupPage extends Component {
               linkPath="/accounts/"
               title="messages"
               >
-                    <AddNewSchedule groupId={this.state.group.id} onFinished={this.updateMessages}/>
+                    <AddGroupModal groupId={this.state.group.id} onFinished={this.updateMessages}/>
                 </GroupList>
             </div>
         )
