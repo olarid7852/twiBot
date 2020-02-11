@@ -45,7 +45,7 @@ class Scheduler extends Component {
         console.log(data)
         console.log(event)
         let $this = this
-        axios.post(`http://127.0.0.1:3001/run-tasks`,
+        axios.post(`http://localhost:3001/run-tasks`,
             {data})
             .then(res => {
                 console.log(res.data)

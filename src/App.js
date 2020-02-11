@@ -14,6 +14,7 @@ import './Component/Home.css'
 import './Component/User.css'
 import PropTypes from 'prop-types'
 import SchedulerPage from "./pages/SchedulerPage";
+import {Helmet} from "react-helmet";
 
 const NavigationBar = withRouter(MenuTab);
 
@@ -28,6 +29,10 @@ class App extends Component {
       
       return (
         <div className="App">
+            <Helmet>
+                <title>Twitter Scraper</title>
+                <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/>
+            </Helmet>
           <Router context={this.staticContext}>
           
           <header className="App-header">
