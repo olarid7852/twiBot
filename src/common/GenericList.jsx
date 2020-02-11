@@ -16,6 +16,7 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
             }
         }
         render () {
+            let {renderButton} = this.props.renderButton || true
             return (
             <div>
                 <div className={"list-group"}>
@@ -27,9 +28,11 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
                 <div className='container'>
           <div className='userSection'>
             <div className='d-flex justify-content-center'>
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+
+   <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Add
             </button>
+
 
         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
@@ -43,11 +46,13 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
                 </button>
               </div>
               <div className="modal-body">
-                <AddComponent onComplete={this.onComplete} additionalProps={this.props.dialogData} submitted={this.state.newDataSubmitStatus}/>
+                <AddComponent onComplete={this.onComplete} additionalProps={this.props.dialogData}
+                              submitted={this.state.newDataSubmitStatus}/>
               </div>
-              <div className="modal-footer">
+          <div className="modal-footer">
                 <button type="button" className="btn btn-primary" onClick={this.handleSubmit}>Save</button>
               </div>
+
             </div>
           </div>
         </div>
@@ -64,12 +69,15 @@ function genericList(ListComponent, AddComponent, pageData, addionalAddDialogPro
             console.log("closed")
         }
 
-        handleSubmit = () => {
+        handleSubmit = (ev) => {
+            ev.persist()
+            console.log(this.state)
           console.log(100)
           this.setState({newDataSubmitStatus: this.state.newDataSubmitStatus + 1})
         }
 
         onComplete = async () =>{
+            console.log(1000)
             await this.updateHandles()
             this.closeModal()
         }

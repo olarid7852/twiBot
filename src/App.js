@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./home/HomePage"
 import Messages from "./messages/MainPage"
 import GroupDetail from "./group/groutItem/MainPage"
+import TagsPage from "./group/tags/MainPage"
 import AccountPage from "./account/MainPage"
 import MainLayout from "./Component/MainLayout"
 import HandlePage from "./handle/Handle"
@@ -73,6 +74,8 @@ class App extends Component {
             <Route exact path="/groups/" component={GroupDetail} />
             <Route exact path="/accounts/" component={AccountPage} />
             <Route exact path="/scheduler/" component={SchedulerPage} />
+             <Route exact path="/tag/:tagName" component= {TagsPage} />
+
             <Route exact path="/messages/:tagName" component={Messages} />
             <Route exact path="/handle/:handle" component={HandlePage} />
           </MainLayout>
