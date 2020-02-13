@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import HandleModal from './HandleModal'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import './Home.css'
-import './User.css'
-import { resolve } from 'q';
+import React, { Component } from "react";
+import HandleModal from "./HandleModal";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import "./Home.css";
+import "./User.css";
+import { resolve } from "q";
 
 class Home extends Component {
   constructor(props) {
@@ -13,83 +13,93 @@ class Home extends Component {
       users: [],
       selectedUser: []
     };
+    console.log("here");
     this.selectionChanged = this.selectionChanged.bind(this);
-    this.addToGroup = this.addToGroup.bind(this)
+    this.addToGroup = this.addToGroup.bind(this);
   }
-  addToGroup(docId){
+  addToGroup(docId) {
     return new Promise((resolve, reject) => {
-      let users = this.state.users
-      let selectedMembers = this.state.selectedUser.map(member => {return users[member]})
+      let users = this.state.users;
+      let selectedMembers = this.state.selectedUser.map(member => {
+        return users[member];
+      });
       let fs = window.firebase.firestore();
-      fs.collection("groups").doc(docId).update({
-        members: selectedMembers 
-      })
-      .then(()=> {
-        console.log("members added")
-        resolve()
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    })
+      fs.collection("groups")
+        .doc(docId)
+        .update({
+          members: selectedMembers
+        })
+        .then(() => {
+          console.log("members added");
+          resolve();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
-  selectionChanged(ev, index){
-    console.log(ev)
-    console.log(index)
-    if(ev.target.checked){
-      this.state.selectedUser.push(index)
-    }
-    else{
-      let mIndex = this.state.selectedUser.find(member=>{
-        return (member === index)
-      })
-      this.state.selectedUser.pop(mIndex)
+  selectionChanged(ev, index) {
+    console.log(ev);
+    console.log(index);
+    if (ev.target.checked) {
+      this.state.selectedUser.push(index);
+    } else {
+      let mIndex = this.state.selectedUser.find(member => {
+        return member === index;
+      });
+      this.state.selectedUser.pop(mIndex);
     }
   }
-  render () {
+  render() {
     return (
       <React.Fragment>
-        <div className='main-box'>
-
-          <div className='header-text'>
+        <div className="main-box">
+          <div className="header-text">
             <h3>TWITTER BOT</h3>
           </div>
-        
-          <div className="container">
 
-          <div className="list-group">
-            {this.state.users.map((user, index) =>
-              <div key={user}>
-            <input type="checkbox" name="CheckBoxInputName" value={user} id={user} onChange={(ev) => this.selectionChanged(ev, index)}/>
-                <label className="list-group-item" htmlFor={user}>{user}</label>
-              </div>
-            )}
-          </div>
-          <div className='button'>
-          <HandleModal addToGroup={this.addToGroup}/>
-          </div>
-          
+          <div className="container">
+            <div className="list-group">
+              {this.state.users.map((user, index) => (
+                <div key={user}>
+                  <input
+                    type="checkbox"
+                    name="CheckBoxInputName"
+                    value={user}
+                    id={user}
+                    onChange={ev => this.selectionChanged(ev, index)}
+                  />
+                  <label className="list-group-item" htmlFor={user}>
+                    {user}
+                  </label>
+                </div>
+              ))}
+            </div>
+            <div className="button">
+              <HandleModal addToGroup={this.addToGroup} />
+            </div>
           </div>
         </div>
       </React.Fragment>
-    )
+    );
   }
 
-  componentWillMount(){
+  componentWillMount() {
     let fs = window.firebase.firestore();
     // let followers = []
-    let handle = this.props.match.params.handle
-    console.log({handle})
+    let handle = this.props.match.params.handle;
+    console.log({ handle });
     fs.collection("followers")
       .where("handle", "==", handle)
-      .get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            let followers = doc.data()['followers']
-            console.log(doc.data())
-            this.setState({users: followers})
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let followers = doc.data()["followers"];
+          console.log(doc.data());
+          this.setState({ users: followers });
         });
       });
   }
 }
 
-export default Home
+export default Home;
