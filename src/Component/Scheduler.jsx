@@ -4,6 +4,7 @@ import './User.css'
 import {getDocumentList} from './utils/firestore'
 import MyListItem from "./MyListItem";
 import DynamicSelect from "./DynamicSelect";
+import {getDocumentListWithQuery} from "../utils/firestore";
 
 
 class Scheduler extends Component {
@@ -16,14 +17,22 @@ class Scheduler extends Component {
             tag: ''
         }
     }
-
+    groupFilter = (docRef) => {
+        return docRef.where("handle", "==", "")
+    }
+    getTags = async () => {
+       // let documents = await getDocumentListWithQuery("handles", this.groupFilter)[0]
+        this.setState({tags: await getDocumentList("handles")})
+        console.log('finsihed')
+        console.log(this.state)
+    }
     updateTags = async () => {
 
         this.setState({tags: await getDocumentList('tags')})
     }
 
     async componentDidMount() {
-        await this.updateTags()
+        await this.getTags()
     }
   handleSelectChange = (selectedValue) =>{
     this.setState({

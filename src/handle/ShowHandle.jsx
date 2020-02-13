@@ -10,6 +10,7 @@ class Home extends Component {
     };
     console.log('here')
     console.log(this.props)
+    console.log(this.state)
     this.selectionChanged = this.selectionChanged.bind(this);
     this.addToGroup = this.addToGroup.bind(this)
   }
@@ -73,19 +74,23 @@ class Home extends Component {
   }
 
   componentDidMount(){
+    console.log('data0')
+
     let fs = window.firebase.firestore();
     // let followers = []
     let handle = this.props.match.params.handle
     console.log({handle})
+
     fs.collection("followers")
       .where("handle", "==", handle)
       .get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             let followers = doc.data()['followers']
+          console.log('data1')
             console.log(doc.data())
             this.setState({users: followers.filter(member => {
               return typeof(member) == 'string'
-            })})
+            }).slice(0,100)})
         });
       });
   }

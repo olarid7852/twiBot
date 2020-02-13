@@ -9,6 +9,7 @@ import TagsPage from "./group/tags/MainPage"
 import AccountPage from "./account/MainPage"
 import MainLayout from "./Component/MainLayout"
 import HandlePage from "./handle/Handle"
+import ShowHandle from "./handle/ShowHandle"
 import MenuTab from "./Component/menu-tab"
 import './App.css';
 import './Component/Home.css'
@@ -76,7 +77,7 @@ class App extends Component {
             <Route exact path="/scheduler/" component={SchedulerPage} />
              <Route exact path="/tag/:tagName" component= {TagsPage} />
 
-            <Route exact path="/messages/:tagName" component={Messages} />
+            <Route exact path="/show/:handle" component={ShowHandle} />
             <Route exact path="/handle/:handle" component={HandlePage} />
           </MainLayout>
           </Router>

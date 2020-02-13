@@ -16,10 +16,10 @@ class DynamicSelect extends Component{
         let arrayOfData = this.props.arrayOfData;
         let options = arrayOfData.map((data) =>
                 <option
-                    key={data.name}
-                    value={data.name}
+                    key={data.tag + data.id}
+                    value={data.tag}
                 >
-                    {data.name}
+                    {data.tag}
                 </option>
             );
 
