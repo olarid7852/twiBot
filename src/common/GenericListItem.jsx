@@ -29,7 +29,7 @@ function genericListItem(pageData) {
         "close-circle"
       ];
       let renderEditButton =
-        linkName !== "/show/" ? (
+        linkName !== "/show/" && linkName!== "/tag/"? (
           <button className="btn">
             <i className="material-icons" onClick={this.handleUpdate}>
               {" "}

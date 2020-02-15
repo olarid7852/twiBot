@@ -15,7 +15,7 @@ let HomePageList = genericList(
   AddHandleModal,
   { collectionName: "handles" },
   "",
-  { pageName: "handlesPage" }
+  { pageName: "handlesPage", modalName : 'Add Twitter Handle' }
 );
 function HomePage() {
   return (

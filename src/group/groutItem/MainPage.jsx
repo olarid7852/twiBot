@@ -30,8 +30,8 @@ class MainPage extends Component {
         }
         console.log('ahahhaha')
         this.MyListItem = genericListItem({collectionName: "handles", mainFieldName: "tag", linkName: "/tag/"})
-        this.HomePageList = genericList(this.MyListItem, AddGroupModal, {collectionName: "handles", filterFunction: filterFunction},
-                {a: 1})
+        this.HomePageList = genericList(this.MyListItem, AddGroupModal, {collectionName: "handles", filterFunction: filterFunction},'',
+                {renderAddButton: false})
     }
     groupFilter = (docRef) => {
         return docRef.where("handle", "!=", "")

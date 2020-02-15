@@ -7,7 +7,7 @@ import React from 'react';
 
 
 let MyListItem = genericListItem({collectionName: "accounts", mainFieldName: "username", linkName: "/account/",  scheduledFieldName: "scraped"})
-let HomePageList = genericList(MyListItem, AddAccountModal, {collectionName: "accounts"})
+let HomePageList = genericList(MyListItem, AddAccountModal, {collectionName: "accounts"},'',{modalName : 'Add Twitter account'})
 function HomePage() {
     return (
         <div>

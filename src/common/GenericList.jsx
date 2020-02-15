@@ -23,28 +23,30 @@ function genericList(
     }
     render() {
       let { renderButton } = this.props.renderButton || true;
-      let { pageName } = extra;
+      let { pageName,modalName,renderAddButton } = extra;
       console.log(extra);
-      let addButton =
-        pageName == "handlesPage" ? (
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            Add Twitter Handle
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >
-            Add
-          </button>
-        );
+      let modalTitle = modalName ? modalName : ''
+      renderAddButton = renderAddButton === undefined ? true : false
+      let addButton = renderAddButton ? (pageName == "handlesPage" ? (
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Add Twitter Handle
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Add
+        </button>
+      )) : '';
+
       return (
         <div>
           <div className={"list-group"}>
@@ -73,7 +75,7 @@ function genericList(
                       <div className="modal-content">
                         <div className="modalHeader modal-header">
                           <h5 className="modal-title" id="exampleModalLabel">
-                            Enter group name
+                           {modalTitle}
                           </h5>
                           <button
                             type="button"
@@ -98,6 +100,13 @@ function genericList(
                             onClick={this.handleSubmit}
                           >
                             Save
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            data-dismiss="modal"
+                          >
+                            Cancel
                           </button>
                         </div>
                       </div>
