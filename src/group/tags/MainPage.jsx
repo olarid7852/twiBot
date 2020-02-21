@@ -51,8 +51,11 @@ class Home extends Component {
             console.log(querySnapshot)
         querySnapshot.forEach((doc) => {
             console.log('ref')
+
             let data = doc.data()
-            if (data.handle === tag) {
+            console.log(data)
+
+            if (data.tag === tag) {
                 this.setState({followers : data.followers.slice(0, 100)})
             }
             console.log(this.state)
