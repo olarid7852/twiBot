@@ -44,6 +44,7 @@ class Home extends Component {
 
   async componentDidMount() {
     let fs = window.firebase.firestore();
+<<<<<<< HEAD
     let tag = this.state.tag;
     let handlesList = [];
     let handles = await fs
@@ -64,6 +65,27 @@ class Home extends Component {
           if (handlesList.includes(data.handle)) {
             this.setState({ followers: data.followers.slice(0, 100) });
           }
+=======
+    // let followers = []
+    let tag = this.state.tag
+      console.log('state')
+      console.log(this.state)
+    let followersPromise = await  fs.collection("followers")
+      //.where("id", "==", tag)
+      .get().then((querySnapshot) => {
+          console.log('querysnapshot')
+            console.log(querySnapshot)
+        querySnapshot.forEach((doc) => {
+            console.log('ref')
+
+            let data = doc.data()
+            console.log(data)
+
+            if (data.tag === tag) {
+                this.setState({followers : data.followers.slice(0, 100)})
+            }
+            console.log(this.state)
+>>>>>>> 183611946aff418deca6b45326c6d9a143abd279
         });
       });
   }
